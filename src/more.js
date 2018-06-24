@@ -105,9 +105,14 @@ console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy
 
 //Extension 6
 function multiMap(arrVals, arrCallbacks) {
-
+	const res = {};
+  forEach(arrVals, (e) => {
+    res[e] = [];
+    forEach(arrCallbacks, (callback) => { res[e].push(callback(e)) })
+  });
+  return res;
 }
 
-// console.log(multiMap(['catfood', 'glue', 'beer'], [function(str) { return str.toUpperCase(); }, function(str) { return str[0].toUpperCase() + str.slice(1).toLowerCase(); }, function(str) { return str + str; }]));
+console.log(multiMap(['catfood', 'glue', 'beer'], [function(str) { return str.toUpperCase(); }, function(str) { return str[0].toUpperCase() + str.slice(1).toLowerCase(); }, function(str) { return str + str; }]));
 // should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
 
